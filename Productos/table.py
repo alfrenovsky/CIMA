@@ -12,7 +12,7 @@ def INSERT_DATA(path,est):
             query1 = 'INSERT INTO productos (Fecha,estacion,presion,temperatura,iwv,ztd,o,n) VALUES (%s,%s,%s,%s,%s,%s,%s,%s)'
             val = (row[0], est ,row[1], row[2], row[3], row[4], row[5], row[6])
             mycursor.execute(query1, val)
-
+            print("hola")
 
 mydb = mysql.connector.connect(
     host="localhost",

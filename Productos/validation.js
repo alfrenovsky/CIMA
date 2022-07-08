@@ -186,7 +186,6 @@ function checkFecha() {
   hasValue(form.elements["Fecha2"], FECHA_REQUIRED);
 }
 function updateMaps() {
-  const R = 300;
   var LO = parseFloat(form.elements["LO"].value.trim());
   var LE = parseFloat(form.elements["LE"].value.trim());
   var LN = parseFloat(form.elements["LN"].value.trim());
@@ -220,9 +219,8 @@ function updateMaps() {
     var Dlat = LN - LS;
     var Dlong = LO - LE;
     var c = Math.sqrt(Math.pow(Dlat, 2) + Math.pow(Dlong, 2));
-    var re = Math.round(R * c);
     const view = map.getView();
-    view.setResolution(Math.abs(re));
+    view.setResolution(Math.abs(c));
     view.setCenter(ol.proj.fromLonLat([(LO + LE) / 2, (LN + LS) / 2]));
   }
 }

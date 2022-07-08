@@ -33,9 +33,8 @@ if (isset($_POST["ZTD"])) {
 
 
 for ($i = 0; $i < $count; $i++) {
-
     $estacion = $estaciones[$i];
-    $consulta = "SELECT * FROM productos WHERE Fecha BETWEEN :a AND :b AND estacion = :c ";
+    $consulta = "SELECT * FROM productos WHERE Fecha BETWEEN :a AND :b AND estacion = :c";
 
     try {
 
@@ -65,20 +64,24 @@ for ($i = 0; $i < $count; $i++) {
             fclose($f);
 
             $zip->addFile($filename);
+        }else{
+            array_push($errorStations, $estacion);
+            $error =true;
         }
     } catch (Exception $e) {
         
         array_push($errorStations, $estacion);
+        $error =true;
     }
 }
 
 $zip->close();
+// if ($error) {
 
-if ($error) {
+//     header("Location:productos.php?error=2&est=" . $estacion);
 
-    header("Location:productos.php?error=2&est=" . $estacion);
+// }
 
-}
 if (filesize($filename2) != false) {
 
     header("Content-type: application/zip;\n");
@@ -96,6 +99,7 @@ if (filesize($filename2) != false) {
     }
 
     unlink($filename2);
+
 
 } else {
 

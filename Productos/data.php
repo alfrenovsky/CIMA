@@ -76,11 +76,12 @@ for ($i = 0; $i < $count; $i++) {
 }
 
 $zip->close();
-// if ($error) {
 
-//     header("Location:productos.php?error=2&est=" . $estacion);
+if ($error) {
 
-// }
+    header("Location:productos.php?error=2&est=" . $estacion);
+
+}
 
 if (filesize($filename2) != false) {
 

@@ -220,7 +220,7 @@ function updateMaps() {
     var Dlong = LO - LE;
     var c = Math.sqrt(Math.pow(Dlat, 2) + Math.pow(Dlong, 2));
     const view = map.getView();
-    view.setResolution(Math.abs(c));
+    view.setResolution(c);
     view.setCenter(ol.proj.fromLonLat([(LO + LE) / 2, (LN + LS) / 2]));
   }
 }

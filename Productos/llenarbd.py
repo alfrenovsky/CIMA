@@ -45,6 +45,18 @@ mydb = mysql.connector.connect(
 )
 
 db = mydb.cursor()
+
+#Intenta crear la tabla, si no esta la crea.
+try:
+
+    query = "CREATE TABLE productos ( FECHA DATETIME, ESTACION char(4), PRESION decimal(17,11), TEMPERATURA decimal(17,14), IWV decimal(17,14), ZTD decimal(8,6), O decimal(8,6), n TINYINT) "
+    db.execute(query)
+    mydb.commit()
+    print("<--Se creo la tabla productos-->")
+
+except:
+
+    print("<--Tabla 'productos' ya existe-->")
 #-----------------------------------------------------------------------------
 
 #Consulta la fecha de los ultimos registros insertados en la tabla para retomar el llenado de la misma

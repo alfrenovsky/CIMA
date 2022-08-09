@@ -10,8 +10,6 @@ services:
     links:
       - php
       - db
-    env_file:
-      - virtual_hosts.env
 
   php:
     image: myuser/php4cima

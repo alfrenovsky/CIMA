@@ -1,6 +1,6 @@
-version: '3'
+version: '3.5'
 services:
-  web:
+  productos-web:
     image: nginx:latest
     ports:
       - "80:80"

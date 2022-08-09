@@ -46,3 +46,8 @@ volumes:
       type: none
       device: $PWD/data
       o: bind
+
+networks:
+  default:
+    name: proxy
+

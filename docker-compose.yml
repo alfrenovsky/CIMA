@@ -2,8 +2,8 @@ version: '3.5'
 services:
   productos-web:
     image: nginx:latest
-    ports:
-      - "80:80"
+    #ports:
+    #  - "80:80"
     volumes:
       - "app:/var/www/html:ro"
       - "$PWD/nginx.conf.template:/etc/nginx/nginx.conf"

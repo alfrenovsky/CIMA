@@ -1,0 +1,50 @@
+version: '3'
+services:
+  web:
+    image: nginx:latest
+    ports:
+      - "80:80"
+    volumes:
+      - "app:/var/www/html:ro"
+      - "$PWD/nginx.conf.template:/etc/nginx/nginx.conf"
+    links:
+      - php
+      - db
+    env_file:
+      - virtual_hosts.env
+
+  php:
+    image: myuser/php4cima
+
+    build:
+      context: php
+    volumes:
+      - "app:/var/www/html"
+    environment:
+      - MYSQL_DATABASE=prod_db
+      - MYSQL_USER=prod_user
+      - MYSQL_PASSWORD=prod_pass
+      - MYSQL_HOST=db
+
+  db:
+    image: mariadb:10.5
+    volumes:
+      - "db:/var/lib/mysql"
+      - "./mariadb.cnf:/etc/mysql/mariadb.conf.d/99-mariadb.cnf"
+    environment:
+      - MYSQL_ROOT_PASSWORD=ladesiempre
+      - MYSQL_DATABASE=prod_db
+      - MYSQL_USER=prod_user
+      - MYSQL_PASSWORD=prod_pass
+
+volumes:
+  app:
+    driver_opts:
+      type: none
+      device: $PWD/Productos
+      o: bind
+  db:
+    driver_opts:
+      type: none
+      device: $PWD/data
+      o: bind

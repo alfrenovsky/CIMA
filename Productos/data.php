@@ -87,11 +87,10 @@ if (filesize($filename2) != false) {
 
     header("Content-type: application/zip;\n");
     header("Content-Transfer-Encoding: Binary");
-    header("Content-length: " . filesize($filename2) . ";\n");
     header("Content-disposition: attachment; filename=\"" . basename($filename2) . "\"");
-    ob_clean();
     flush();
     readfile($filename2);
+
 
     for ($i = 0; $i < $count; $i++) {
 

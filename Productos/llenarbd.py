@@ -1,4 +1,5 @@
 import urllib.request,mysql.connector,csv,re
+import os
 from bs4 import BeautifulSoup
 from datetime import datetime
 from io import StringIO
@@ -18,7 +19,7 @@ def INSERT_DATA(link,est,fecha):
             val = (row[0], est ,row[1], row[2], row[3], row[4], row[5], row[6])
 
             fecha_csv = datetime.fromisoformat(row[0])
-            
+
             if fecha_csv > fecha:
 
                 db.execute(query_Insert, val)
@@ -38,10 +39,10 @@ tags = soup('a')
 
 # ----------------Creo objeto mysql para CRUD de BD--------------------------
 mydb = mysql.connector.connect(
-    host="localhost",
-    user="root",
-    passwd="",
-    database="productos"
+    host=os.environ['MYSQL_HOST'],
+    user=os.environ['MYSQL_USER'],
+    passwd=os.environ['MYSQL_PASSWORD'],
+    database=os.environ['MYSQL_DATABASE'],
 )
 
 db = mydb.cursor()
@@ -85,7 +86,7 @@ for tag in tags:
     tag = str(tag.get('href'))
 
     if tag != "../":
-        
+
         link2 = link + tag
         datos2 = urllib.request.urlopen(link2).read().decode()
         soup2 =  BeautifulSoup(datos2, "html.parser")
@@ -94,11 +95,11 @@ for tag in tags:
         carpeta_year=[int(s) for s in re.findall(r'-?\d+\.?\d*', tag)][0]
 
         for tag2 in tags2:
-            
+
             tag2 = str(tag2.get('href'))
 
             if tag2 != "../":
-                    
+
                 estacion = tag2
                 link3 = link2 + estacion
                 est = estacion[:4]
@@ -107,7 +108,7 @@ for tag in tags:
 
                     est = 'CAL1'
 
-                try: 
+                try:
 
                     if estacion_FechaMax[est].year <= carpeta_year:
 

@@ -37,6 +37,7 @@ tags = soup('a')
 #--------------------------------------------------------------------------------------------
 
 # ----------------Creo objeto mysql para CRUD de BD--------------------------
+
 mydb = mysql.connector.connect(
     host="localhost",
     user="root",

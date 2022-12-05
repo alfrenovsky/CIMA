@@ -69,7 +69,8 @@ for ($i = 0; $i < $count; $i++) {
             $error =true;
         }
     } catch (Exception $e) {
-        
+
+
         array_push($errorStations, $estacion);
         $error =true;
     }
